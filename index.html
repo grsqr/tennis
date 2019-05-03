@@ -136,7 +136,7 @@ tbody#d_rec_table tr:nth-child(-n+4) {
 table#main_table {
   border-collapse:collapse;
   border-spacing:0;
-  margin:2px;
+  margin-bottom:2px;
 }
 table#main_table th {
   background-color:#ccc;
@@ -197,26 +197,28 @@ table#main_table td {
 <div v-if="isLoading" class="loader"></div>
 <div v-else="isLoading">
 	<!-- メイン画面 -->
-	<table id="main_table">
-		<thead>
-			<tr>
-				<th>日付と場所</th>
-				<th>時間帯</th>
-				<th>操作</th>
-			</tr>
-		</thead>
-		<tbody id="d_rec_table">
-			<tr v-for="(rec, index) in records">
-				<td>{{rec.title}}</td>
-				<td>{{formatCheckTimes(rec.times)}}</td>
-				<td>
-					<button type="button" class="btn btn-secondary" v-on:click="updateEntry(index)">変更</button>
-					<button type="button" class="btn btn-secondary" v-on:click="deleteEntry(index)">削除</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#newEntry" style="margin:2px;">新規登録</button>
+	<div style="padding:2px;">
+		<table id="main_table">
+			<thead>
+				<tr>
+					<th>日付と場所</th>
+					<th>時間帯</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody id="d_rec_table">
+				<tr v-for="(rec, index) in records">
+					<td>{{rec.title}}</td>
+					<td>{{formatCheckTimes(rec.times)}}</td>
+					<td>
+						<button type="button" class="btn btn-secondary" v-on:click="updateEntry(index)">変更</button>
+						<button type="button" class="btn btn-secondary" v-on:click="deleteEntry(index)">削除</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#newEntry">新規登録</button>
+	</div>
 
 	<!-- 新規登録ダイアログ -->
 	<div class="modal fade" id="newEntry" tabindex="-1" role="dialog">
