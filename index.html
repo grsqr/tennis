@@ -67,6 +67,8 @@ function myLoad() {
 				}).catch(error => this.processError(error))
 			}
 			, postNew() {
+				if (!this.isCheckTimes(form_new_entry.p_time)) return false;
+				$('#newEntry').modal('hide');
 				this.isLoading = true;
 				fetch(GAS_URL, {
 					method: "post"
@@ -78,7 +80,9 @@ function myLoad() {
 						return;
 					}
 					throw new Error("登録時にエラーが発生しました。" + response);
-				}).catch(error => this.processError(error))
+				}).catch(error => {
+					this.processError(error);
+				})
 			}
 			, updateEntry(index) {
 				const rec = this.records[index];
@@ -89,6 +93,8 @@ function myLoad() {
 				$('#dlgUpdateEntry').modal();
 			}
 			, postUpdate() {
+				if (!this.isCheckTimes(form_update_entry.p_update_time)) return false;
+				$('#dlgUpdateEntry').modal('hide');
 				this.isLoading = true;
 				this.updateTimes.sort();	// 定義順にならない(クリック順みたい)
 				fetch(GAS_URL, {
@@ -103,6 +109,15 @@ function myLoad() {
 					}
 					throw new Error("時間行進時にエラーが発生しました。" + response);
 				}).catch(error => this.processError(error))
+			}
+			, isCheckTimes(timesCtrls) {
+				for (let i = 0, len = timesCtrls.length; i < len; i++) {
+					if (timesCtrls[i].checked) {
+						return true;
+					}
+				}
+				alert("時間帯を選択してください。");
+				return false;
 			}
 		}
 		, created() {
@@ -259,7 +274,7 @@ table#main_table td {
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="postNew">　登　録　</button>
+					<button type="button" class="btn btn-primary" v-on:click="postNew">　登　録　</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
 				</div>
 			</div>
@@ -291,7 +306,7 @@ table#main_table td {
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="postUpdate">　変　更　</button>
+					<button type="button" class="btn btn-primary" v-on:click="postUpdate">　変　更　</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
 				</div>
 			</div>
