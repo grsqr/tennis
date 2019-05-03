@@ -9,6 +9,19 @@
 <script>
 const GAS_URL = "https://script.google.com/macros/s/AKfycbwS7J3e5zFwFYttrhglkjQGH7-Aj15ogcDsDFgV54To7QSGCCEA/exec";
 function myLoad() {
+	// キャッシュにより更新されない対策
+	// クエリパラメータvの後につけたタイムスタンプを見て、現在日時より3分以上古ければ
+	// 現在日時のタイムスタンプをつけてリロード
+	const query = location.search;
+	const v = /\?v=([0-9]+)\&?/.exec(query);
+	if ((v != null) && ((Date.now() - 3000 * 60) < v[1])) {
+		// ok
+	} else {
+		const newUrl = location.href.substring(0, location.href.length - query.length) + "?v=" + Date.now();
+		location.replace(newUrl);
+		return;
+	}
+
 	var recTable = new Vue({
 		el: '#app'
 		, data: {
