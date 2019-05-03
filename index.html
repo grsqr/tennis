@@ -131,7 +131,10 @@ select[name="p_date"] option.san {
 	background-color:#fdd;
 }
 tbody#d_rec_table tr:nth-child(-n+4) {
-  background-color:#bff;
+	background-color:#bff;
+}
+table.table td, table.table th {
+	font-size: 12px;
 }
 
 .loader,
@@ -183,11 +186,11 @@ tbody#d_rec_table tr:nth-child(-n+4) {
 <div v-else="isLoading">
 	<!-- メイン画面 -->
 	<table class="table table-bordered">
-		<thead  class="thead-dark">
+		<thead class="thead-dark">
 			<tr>
-				<th>日付と場所</th>
-				<th>時間帯</th>
-				<th>操作</th>
+				<th scope="col">日付と場所</th>
+				<th scope="col">時間帯</th>
+				<th scope="col">操作</th>
 			</tr>
 		</thead>
 		<tbody id="d_rec_table">
