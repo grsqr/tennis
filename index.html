@@ -133,6 +133,20 @@ select[name="p_date"] option.san {
 tbody#d_rec_table tr:nth-child(-n+4) {
 	background-color:#bff;
 }
+table#main_table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+table#main_table th {
+  background-color:#ccc;
+  border:1px solid #000;
+  font-weight:normal;
+  text-align:center;
+}
+table#main_table td {
+  padding:3px;
+  border:1px solid #000;
+}
 
 .loader,
 .loader:after {
@@ -182,7 +196,7 @@ tbody#d_rec_table tr:nth-child(-n+4) {
 <div v-if="isLoading" class="loader"></div>
 <div v-else="isLoading">
 	<!-- メイン画面 -->
-	<table>
+	<table id="main_table">
 		<thead>
 			<tr>
 				<th>日付と場所</th>
