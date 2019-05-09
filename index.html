@@ -49,7 +49,7 @@ function myLoad() {
 					, 'h17':'🕔'
 					, 'h19':'🕖'
 				};
-				return hours.map(hour => emoji[hour] + hour.substring(1) + "時").join(", ");
+				return hours.map(hour => emoji[hour] + hour.substring(1) + "時").join("<br>");
 			}
 			, processError(error) {
 				this.isLoading = false;
@@ -207,7 +207,7 @@ table#main_table td {
 			<tbody id="d_rec_table">
 				<tr v-for="(rec, index) in records">
 					<td>{{rec.title}}</td>
-					<td>{{formatCheckTimes(rec.times)}}</td>
+					<td v-html="formatCheckTimes(rec.times)"></td>
 					<td>
 						<button type="button" class="btn btn-secondary" v-on:click="updateEntry(index)">変更</button>
 						<button type="button" class="btn btn-secondary" v-on:click="deleteEntry(index)">削除</button>
