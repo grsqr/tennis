@@ -41,7 +41,15 @@ function myLoad() {
 		, methods: {
 			// ["h09", "h11"] → "09時, 19時"
 			formatCheckTimes(hours) {
-				return hours.map(hour => hour.substring(1) + "時").join(", ");
+				const emoji = {
+					'h09':'🕘'
+					, 'h11':'🕚'
+					, 'h13':'🕐'
+					, 'h15':'🕒'
+					, 'h17':'🕔'
+					, 'h19':'🕖'
+				};
+				return hours.map(hour => emoji[hour] + hour.substring(1) + "時").join(", ");
 			}
 			, processError(error) {
 				this.isLoading = false;
