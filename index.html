@@ -164,6 +164,9 @@ function myLoad() {
 }
 </script>
 <style>
+[v-cloak] {
+  display: none;
+}
 select[name="p_date"] option.sat {
 	background-color:#ddf;
 }
@@ -195,7 +198,7 @@ table#main_table td {
 <div v-if="isLoading" class="loader"></div>
 <div v-else="isLoading">
 	<!-- メイン画面 -->
-	<div style="padding:2px;">
+	<div style="padding:2px;" v-cloak>
 		<table id="main_table">
 			<thead>
 				<tr>
